@@ -1,0 +1,7 @@
+1. Answer the question in page 14
+The server serving asynchronously because the setTimeout make the code run asynchronously.
+The server will serve before the callback function in setTimeout run.
+
+2. explain the result of using process.nextStick() instead of setImmediate() in example in slide 28
+The result of fib will be printed out before the setTimeout because nextTick() will be run before any additional I/O
+or timers fire in subsequent of the event loop.
