@@ -1,0 +1,21 @@
+{
+  "name": "test_node_module",
+  "version": "1.0.0",
+  "description": "Just for testing the node module",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "run"
+  },
+  "keywords": [
+    "peter",
+    "quytran",
+    "nodejs",
+    "expressjs"
+  ],
+  "author": "Quy Tran",
+  "license": "ISC"
+}
