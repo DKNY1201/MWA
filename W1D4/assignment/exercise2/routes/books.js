@@ -31,6 +31,7 @@ router.get('/', (req, res, next) => {
     const bookToUpdate = books.find(book => book.id == updateBook.id);
     const index = books.indexOf(bookToUpdate);
     if (index != -1) {
+        // books.splice(index, 1, bookToUpdate);
         books[index] = updateBook;
         res.end('Update successful!');
     }
