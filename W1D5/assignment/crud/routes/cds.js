@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const Book = require('../model/Book');
+const CD = require('../model/CD');
 
 router.get('/', (req, res, next) => {
-    Book.find((err, books) => {
+    CD.find((err, cds) => {
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
@@ -13,12 +13,12 @@ router.get('/', (req, res, next) => {
         }
 
         res.status(200).json({
-            books: books
+            cds: cds
         });
     });
 }).get('/:id', (req, res, next) => {
     const id = req.params.id;
-    Book.findOne({_id: id}, (err, book) => {
+    CD.findOne({_id: id}, (err, cd) => {
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
@@ -34,29 +34,20 @@ router.get('/', (req, res, next) => {
         }
 
         res.status(200).json({
-            books: book,
-            publisher: book.getPublisher()
+            cd: cd
         });
     });
 }).post('/', (req, res, next) => {
-    const book = new Book({
+    const cd = new CD({
         title: req.body.title,
-        author: req.body.author,
-        published_date: new Date(req.body.published_date),
-        pages: req.body.pages,
-        language: req.body.language,
-        publisher: {
-            name: req.body.publisher_name,
-            founded: req.body.publisher_founded,
-            location: req.body.publisher_location
-        }
+        singer: req.body.singer,
+        releaseYear: req.body.releaseYear
     });
 
-    const save = book.save();
-    save.then((book) => {
+    const save = cd.save();
+    save.then((cd) => {
         res.status(200).json({
-            book: book,
-            publisher: book.getPublisher()
+            cd: cd
         })
     }).catch(err => {
         return res.status(500).json({
@@ -66,7 +57,7 @@ router.get('/', (req, res, next) => {
     })
 }).put('/:id', (req, res, next) => {
     const id = req.params.id;
-    Book.findOne({_id: id}, (err, book) => {
+    CD.findOne({_id: id}, (err, cd) => {
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
@@ -74,19 +65,15 @@ router.get('/', (req, res, next) => {
             });
         }
 
-        book.title = req.body.title;
-        book.author = req.body.author;
-        book.published_date = req.body.published_date;
-        book.pages = req.body.pages;
-        book.language = req.body.language;
-        book.setPublisher(req.body.publisher_name, req.body.publisher_founded, req.body.publisher_location);
+        cd.title = req.body.title;
+        cd.singer = req.body.singer;
+        cd.releaseYear = req.body.releaseYear;
 
-        const save = book.save();
-        save.then((book) => {
+        const save = cd.save();
+        save.then((cd) => {
             res.status(200).json({
                 message: 'Update successful!',
-                book: book,
-                publisher: book.getPublisher()
+                cd: cd,
             })
         }).catch(err => {
             return res.status(500).json({
@@ -97,7 +84,7 @@ router.get('/', (req, res, next) => {
     })
 }).delete('/:id', (req, res, next) => {
     const id = req.params.id;
-    Book.findOne({_id: id}, (err, book) => {
+    CD.findOne({_id: id}, (err, cd) => {
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
@@ -105,12 +92,11 @@ router.get('/', (req, res, next) => {
             });
         }
 
-        const save = book.remove();
-        save.then((book) => {
+        const save = cd.remove();
+        save.then((cd) => {
             res.status(200).json({
                 message: 'Remove successful!',
-                book: book,
-                publisher: book.getPublisher()
+                cd: cd,
             })
         }).catch(err => {
             return res.status(500).json({
