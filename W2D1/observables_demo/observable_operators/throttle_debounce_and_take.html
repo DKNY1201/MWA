@@ -1,0 +1,17 @@
+<script src="https://unpkg.com/rxjs/bundles/Rx.min.js"></script>
+<input></input>
+
+<script>
+    const input = Rx.Observable.fromEvent(document.querySelector('input'), 'input');
+    // Only let through an event every 200 ms
+    input.throttleTime(1000)
+        .map(event => event.target.value)
+        .subscribe(value => console.log(value));
+    // Discard emitted values that take less than the specified time between output
+    input.debounceTime(1000)
+        .map(event => event.target.value)
+        .subscribe(value => console.log(value));
+    // Stop the stream of events after 3 events
+    input.take(3).map(event => event.target.value)
+        .subscribe(value => console.log(value));
+</script>

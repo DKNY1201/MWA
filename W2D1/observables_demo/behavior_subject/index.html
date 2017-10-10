@@ -1,0 +1,11 @@
+<script src="https://unpkg.com/rxjs/bundles/Rx.min.js"></script>
+<button>Clickme</button>
+<div></div>
+
+<script>
+    const clickEmitted = new Rx.BehaviorSubject('Not clicked');
+    const button = document.querySelector('button');
+    const div = document.querySelector('div');
+    button.addEventListener('click', () => clickEmitted.next('Clicked!'));
+    clickEmitted.subscribe(value => div.textContent = value);
+</script>

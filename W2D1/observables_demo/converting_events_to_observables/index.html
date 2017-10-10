@@ -1,0 +1,6 @@
+<script src="https://unpkg.com/rxjs/bundles/Rx.min.js"></script>
+
+<script>
+    Rx.Observable.fromEvent(document, 'click')
+        .subscribe(e => console.log(e));
+</script>

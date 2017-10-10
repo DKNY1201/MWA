@@ -1,0 +1,13 @@
+<script src="https://unpkg.com/rxjs/bundles/Rx.min.js"></script>
+<input></input>
+
+<script>
+    const input = Rx.Observable.fromEvent(document.querySelector('input'), 'input');
+    // Filter out target values less than 3 characters long
+    input.filter(event => event.target.value.length > 2)
+        .map(event => event.target.value)
+        .subscribe(value => console.log(value));
+    // Delay the events
+    input.delay(1000).map(event => event.target.value)
+        .subscribe(value => console.log(value));
+</script>

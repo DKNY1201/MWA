@@ -1,0 +1,13 @@
+<script src="https://unpkg.com/rxjs/bundles/Rx.min.js"></script>
+<input></input>
+<button>Click</button>
+
+<script>
+    // Passes through events until other observable triggers an event
+    const input = Rx.Observable.fromEvent(document.querySelector('input'), 'input');
+    const stop = Rx.Observable.fromEvent(document.querySelector('button'), 'click');
+    input.takeUntil(stop)
+        .map(event => event.target.value)
+        .subscribe(value => console.log(value));
+
+</script>
